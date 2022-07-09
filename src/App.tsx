@@ -1,26 +1,42 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
+import { v4 as makeId } from "uuid";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import Todo from "./models/todo";
+import TodoContextProps from "./models/todoContextProps";
 
-/* const todos: Todo[] = [
-  { id: 1, name: "Play games", done: false },
-  { id: 2, name: "Go outside", done: true },
-  { id: 3, name: "Complete this project", done: false },
-]; */
+export const TodoContext = createContext<TodoContextProps | null>(null);
 
 function App() {
   const [todos, changeTodos] = useState<Todo[]>([]);
 
   function addTodo(todo: string) {
-    changeTodos([...todos, { id: 4, name: todo, done: false }]);
+    changeTodos([...todos, { id: makeId(), name: todo, done: false }]);
+  }
+
+  function changeTodoCompletion(todo: Todo) {
+    const newState = todos.map((currentTodo) => {
+      if (currentTodo === todo) {
+        return { ...currentTodo, done: !currentTodo.done };
+      }
+      return currentTodo;
+    });
+    changeTodos(newState);
+  }
+
+  function deleteTodo(todo: Todo) {
+    changeTodos(todos.filter((currentTodo) => currentTodo !== todo));
   }
 
   return (
     <div>
       <h1>Todo List</h1>
-      <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} />
+      <TodoContext.Provider
+        value={{ todos, addTodo, changeTodoCompletion, deleteTodo }}
+      >
+        <TodoForm />
+        <TodoList />
+      </TodoContext.Provider>
     </div>
   );
 }

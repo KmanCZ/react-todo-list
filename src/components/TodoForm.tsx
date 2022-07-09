@@ -1,11 +1,10 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useContext } from "react";
+import TodoContextProps from "../models/todoContextProps";
+import { TodoContext } from "../App";
 
-interface TodoFormProps {
-  addTodo: (todo: string) => void;
-}
-
-function TodoForm({ addTodo }: TodoFormProps) {
+function TodoForm() {
   const [input, changeInput] = useState<string>("");
+  const { addTodo } = useContext(TodoContext) as TodoContextProps;
 
   function submitHandler(e: FormEvent) {
     e.preventDefault();

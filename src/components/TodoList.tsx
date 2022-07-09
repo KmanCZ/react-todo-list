@@ -1,14 +1,15 @@
-import Todo from "../models/todo";
+import { useContext } from "react";
+import { TodoContext } from "../App";
+import TodoContextProps from "../models/todoContextProps";
+import TodoItem from "./TodoItem";
 
-interface TodosListProps {
-  todos: Todo[];
-}
+function TodoList() {
+  const { todos } = useContext(TodoContext) as TodoContextProps;
 
-function TodoList({ todos }: TodosListProps) {
   return (
     <ul>
       {todos.map((todo) => (
-        <li key={todo.id}>{todo.name}</li>
+        <TodoItem key={todo.id} todo={todo} />
       ))}
     </ul>
   );

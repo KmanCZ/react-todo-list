@@ -1,9 +1,17 @@
-function DotoList() {
+import Todo from "../models/todo";
+
+interface TodosListProps {
+  todos: Todo[];
+}
+
+function TodoList({ todos }: TodosListProps) {
   return (
     <ul>
-      <li>Go outside</li>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.name}</li>
+      ))}
     </ul>
   );
 }
 
-export default DotoList;
+export default TodoList;

@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { v4 as makeId } from "uuid";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
@@ -8,7 +8,14 @@ import TodoContextProps from "./models/todoContextProps";
 export const TodoContext = createContext<TodoContextProps | null>(null);
 
 function App() {
-  const [todos, changeTodos] = useState<Todo[]>([]);
+  const [todos, changeTodos] = useState<Todo[]>(() => {
+    const initialvalues: Todo[] = JSON.parse(localStorage.getItem("todos")!);
+    return initialvalues || [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   function addTodo(todo: string) {
     changeTodos([...todos, { id: makeId(), name: todo, done: false }]);

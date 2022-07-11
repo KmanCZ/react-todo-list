@@ -1,4 +1,18 @@
+import "cypress-localstorage-commands";
+
 describe("Working with todo list items", () => {
+  before(() => {
+    cy.clearLocalStorageSnapshot();
+  });
+
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
+  afterEach(() => {
+    cy.saveLocalStorage();
+  });
+
   it("Get initial state of page", () => {
     cy.visit("http://localhost:3000/");
 
@@ -12,6 +26,13 @@ describe("Working with todo list items", () => {
       cy.get("button").first().click("bottom");
     });
 
+    cy.get("ul").children("li").should("have.length", 3);
+  });
+
+  it("Test saving to local storage", () => {
+    cy.get("ul").children("li").should("have.length", 3);
+    cy.visit("http://localhost:3000/");
+    cy.reload(false);
     cy.get("ul").children("li").should("have.length", 3);
   });
 

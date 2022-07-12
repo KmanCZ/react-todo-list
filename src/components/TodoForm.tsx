@@ -14,15 +14,24 @@ function TodoForm() {
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <input
-        type="text"
-        onChange={(e) => changeInput(e.target.value)}
-        value={input}
-      />
-      <button type="submit" disabled={input === ""}>
-        Add
-      </button>
+    <form onSubmit={submitHandler} className="card shadow-xl w-96 bg-primary">
+      <div className="card-body mx-auto">
+        <div className="input-group">
+          <input
+            type="text"
+            onChange={(e) => changeInput(e.target.value)}
+            value={input}
+            className="input input-bordered w-72 focus:outline-none"
+          />
+          <button
+            type="submit"
+            disabled={input === ""}
+            className="btn btn-square btn-success"
+          >
+            Add
+          </button>
+        </div>
+      </div>
     </form>
   );
 }

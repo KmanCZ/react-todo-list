@@ -37,22 +37,34 @@ describe("Working with todo list items", () => {
   });
 
   it("Test todo completion controls", () => {
-    cy.contains("✅").eq(0).click();
+    cy.get(".btn-group").first().children().eq(0).click();
     cy.contains("Go outside").should(
       "have.css",
       "text-decoration",
-      "line-through solid rgb(0, 0, 0)"
+      "line-through solid rgb(179, 197, 239)"
     );
-    cy.contains("❌").eq(0).click();
+    cy.get(".btn-group")
+      .first()
+      .children()
+      .eq(0)
+      .children()
+      .should("have.attr", "data-icon", "xmark");
+    cy.get(".btn-group").first().children().eq(0).click();
     cy.contains("Go outside").should(
       "have.css",
       "text-decoration",
-      "none solid rgb(0, 0, 0)"
+      "none solid rgb(179, 197, 239)"
     );
+    cy.get(".btn-group")
+      .first()
+      .children()
+      .eq(0)
+      .children()
+      .should("have.attr", "data-icon", "check");
   });
 
   it("Test todo deletion controls", () => {
-    cy.get("li").eq(1).children().contains("🗑").click();
+    cy.get(".btn-group").eq(1).children().eq(1).click();
     cy.contains("Write some code").should("not.exist");
     cy.get("ul").children("li").should("have.length", 2);
   });

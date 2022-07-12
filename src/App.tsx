@@ -1,9 +1,17 @@
 import { useState, createContext, useEffect } from "react";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faTrashCan,
+  faCheck,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { v4 as makeId } from "uuid";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import Todo from "./models/todo";
 import TodoContextProps from "./models/todoContextProps";
+
+library.add(faTrashCan, faCheck, faXmark);
 
 export const TodoContext = createContext<TodoContextProps | null>(null);
 
@@ -36,8 +44,8 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Todo List</h1>
+    <div className="m-5 w-fit mx-auto bg-primary-content p-5 rounded-lg">
+      <h1 className="text-5xl text-center font-light mb-2">Todo List</h1>
       <TodoContext.Provider
         value={{ todos, addTodo, changeTodoCompletion, deleteTodo }}
       >

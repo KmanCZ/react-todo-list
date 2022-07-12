@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { TodoContext } from "../App";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Todo from "../models/todo";
 import TodoContextProps from "../models/todoContextProps";
 
@@ -13,14 +14,24 @@ function TodoItem({ todo }: TodoItemProps) {
   ) as TodoContextProps;
 
   return (
-    <li>
-      <span style={{ textDecoration: todo.done ? "line-through" : "none" }}>
+    <li className="p-5 rounded-lg shadow-xl bg-base-100 flex justify-between items-center">
+      <span
+        className="inline-block break-words w-1/2"
+        style={{ textDecoration: todo.done ? "line-through" : "none" }}
+      >
         {todo.name}
-      </span>{" "}
-      <button onClick={() => changeTodoCompletion(todo)}>
-        {todo.done ? "❌" : "✅"}
-      </button>
-      <button onClick={() => deleteTodo(todo)}>🗑</button>
+      </span>
+      <span className="btn-group inline-block">
+        <button
+          className="btn btn-sm"
+          onClick={() => changeTodoCompletion(todo)}
+        >
+          <FontAwesomeIcon icon={todo.done ? "xmark" : "check"} />
+        </button>
+        <button className="btn btn-sm" onClick={() => deleteTodo(todo)}>
+          <FontAwesomeIcon icon="trash-can" />
+        </button>
+      </span>
     </li>
   );
 }

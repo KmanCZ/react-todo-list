@@ -5,4 +5,5 @@ export default interface TodoContextProps {
   addTodo(todo: string): void;
   changeTodoCompletion(todo: Todo): void;
   deleteTodo(todo: Todo): void;
+  changeTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }

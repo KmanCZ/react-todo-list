@@ -47,7 +47,13 @@ function App() {
     <div className="m-5 w-fit mx-auto bg-primary-content p-5 rounded-lg">
       <h1 className="text-5xl text-center font-light mb-2">Todo List</h1>
       <TodoContext.Provider
-        value={{ todos, addTodo, changeTodoCompletion, deleteTodo }}
+        value={{
+          todos,
+          addTodo,
+          changeTodoCompletion,
+          deleteTodo,
+          changeTodos,
+        }}
       >
         <TodoForm />
         <TodoList />

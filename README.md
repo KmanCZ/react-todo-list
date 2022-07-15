@@ -1,0 +1,3 @@
+# React Todo List
+
+This is mainly testing project before my main project I'm planning to do...

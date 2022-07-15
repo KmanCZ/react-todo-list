@@ -5,6 +5,7 @@ import {
   faCheck,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import GithubCorner from "react-github-corner";
 import { v4 as makeId } from "uuid";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <div className="m-5 w-fit mx-auto bg-primary-content p-5 rounded-lg">
+      <GithubCorner href="https://github.com/KmanCZ/react-todo-list" />
       <h1 className="text-5xl text-center font-light mb-2">Todo List</h1>
       <TodoContext.Provider
         value={{

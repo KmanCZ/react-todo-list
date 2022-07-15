@@ -2,7 +2,7 @@
   "name": "react-dnd-todolist",
   "private": false,
   "version": "1.0.0",
-  "homepage": "https://kmancz.github.io/react-todo-list/",
+  "homepage": "https://kmancz.github.io/react-todo-list",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
